@@ -1,0 +1,12 @@
+services:
+  backend:
+    build:
+      context: .                      # Project root
+      dockerfile: ./backend/Dockerfile
+    env_file:
+      - .env
+    environment:
+      - BACKEND_PORT=${BACKEND_PORT}                  # Use BACKEND_PORT from .env
+    ports:
+      - "${BACKEND_PORT:-8080}:${BACKEND_PORT:-8080}"
+    restart: unless-stopped
