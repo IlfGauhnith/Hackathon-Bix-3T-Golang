@@ -9,4 +9,10 @@ services:
       - BACKEND_PORT=${BACKEND_PORT}                  # Use BACKEND_PORT from .env
     ports:
       - "${BACKEND_PORT:-8080}:${BACKEND_PORT:-8080}"
+      - "6060:6060"  # pprof port
     restart: unless-stopped
+    volumes:
+      - backend_log:/app/src/logs
+
+volumes:
+  backend_log:

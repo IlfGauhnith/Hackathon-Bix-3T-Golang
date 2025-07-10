@@ -3,7 +3,7 @@ FROM node:20-bullseye AS final
 
 # Install essential system tools and Go build dependencies
 RUN apt-get update && apt-get install -y \
-    bash git curl tar gcc g++ pkg-config
+    bash git curl tar gcc g++ pkg-config nano tree
 
 # Define environment variables for Go installation
 ENV GO_VERSION=1.24.4
@@ -34,8 +34,14 @@ RUN go install github.com/swaggo/swag/cmd/swag@latest
 # Copy the rest of the project
 COPY /backend ./
 
-# (Optional) Generate Swagger & ReDoc if uncommented
-RUN swag init --dir ./cmd/ --output ../docs --parseDependency
+# Generate swagger.yaml & docs.go
+RUN swag init \
+    --generalInfo ./main.go \
+    --dir cmd,pkg/handler \
+    --exclude pkg/config,docs \
+    --output ../docs \
+    --parseDependency
+# Generate Swagger html if ReDoc
 RUN redoc-cli bundle ../docs/swagger.yaml -o ../docs/docs.html
 
 # Build application binaries

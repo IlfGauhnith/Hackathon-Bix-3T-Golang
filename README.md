@@ -33,3 +33,18 @@ docker-compose up --build
 
 ### API Documentation
 The full OpenAPI (Swagger) specification is available at ```http://localhost:{{PORT}}/docs/openapi```
+
+
+### Profiling with pprof
+The application provides runtime profiling data via Go's net/http/pprof package. 
+
+Once the server is running, access the profiling interface at:
+```http://localhost:6060/debug/pprof/```
+
+#### For example:
+
+- Goroutine profile: ```http://localhost:6060/debug/pprof/goroutine```
+
+- Heap profile: ```http://localhost:6060/debug/pprof/heap```
+
+- CPU profile (30s): ```http://localhost:6060/debug/pprof/profile?seconds=30```
