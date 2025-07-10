@@ -12,7 +12,6 @@ import (
 type Config struct {
 	Port               string // HTTP port to bind the server
 	ExternalAPIBaseURL string // Base URL for external product API
-	StartPage          int    // Initial page number for external API
 	BatchSize          int    // Number of CSV records per processing batch
 	MaxConcurrency     int    // Maximum concurrent threads for processing
 }
@@ -25,7 +24,6 @@ func LoadConfig() (*Config, error) {
 	return &Config{
 		Port:               getEnv("BACKEND_PORT", "8080"),
 		ExternalAPIBaseURL: getEnv("EXTERNAL_API_BASE_URL", "https://hackathon-produtos-api.onrender.com/api/produtos"),
-		StartPage:          getEnvAsInt("EXTERNAL_API_START_PAGE", 1),
 		BatchSize:          getEnvAsInt("BATCH_SIZE", 1000),
 		MaxConcurrency:     getEnvAsInt("MAX_CONCURRENCY", runtime.NumCPU()), // default to # of CPUs
 	}, nil

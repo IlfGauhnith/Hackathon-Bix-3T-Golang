@@ -18,7 +18,10 @@ This project addresses the data discrepancy issues faced by a major retail netwo
 </details>
 
 ### Env
-- ```{{BACKEND_PORT}}``` Backend port to listen to 
+- ```BACKEND_PORT``` Backend port to listen to 
+- ```BATCH_SIZE``` Specifies the number of records to process in each batch when comparing CSV data with the external API. Adjusting this value can help optimize performance and resource usage based on your environment.
+- ```EXTERNAL_API_BASE_URL```
+
 ### Local Execution
 
 ```bash
@@ -32,7 +35,7 @@ docker-compose up --build
 ```
 
 ### API Documentation
-The full OpenAPI (Swagger) specification is available at ```http://localhost:{{PORT}}/docs/openapi```
+The full OpenAPI (Swagger) specification is available at ```http://localhost:{{BACKEND_PORT}}/docs/openapi```
 
 
 ### Profiling with pprof

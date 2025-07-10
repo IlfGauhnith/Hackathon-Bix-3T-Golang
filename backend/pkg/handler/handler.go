@@ -102,7 +102,7 @@ func UploadHandler(cfg *config.Config) gin.HandlerFunc {
 				end = total
 			}
 			batch := rows[start:end]
-			pageNum := cfg.StartPage + i
+			pageNum := i + 1
 
 			// In a production environment, I would move that goroutine to dedicated worker pool microservice
 			// to avoid blocking the main API thread.
@@ -215,7 +215,7 @@ func UploadHandlerSequential(cfg *config.Config) gin.HandlerFunc {
 				end = total
 			}
 			batch := rows[start:end]
-			pageNum := cfg.StartPage + i
+			pageNum := i + 1
 
 			logger.Log.Infof("Processing batch %d/%d (records %d–%d)", i+1, totalBatches, start+1, end)
 
